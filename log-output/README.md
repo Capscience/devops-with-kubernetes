@@ -1,2 +1,2 @@
 # Log output
-Deployed to k3d with `kubectl create deployment log-output --image=capscience/log-output`
+Deploy with `kubectl apply -f manifests/deployment.yaml`
