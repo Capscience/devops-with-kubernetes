@@ -1,7 +1,8 @@
 # Log output
-Contains two applications:
-- `log-writer`
-- `pingpong`
+Contains three applications:
+- `log-writer` writes logs to volume
+- `log-api` reads and serves logs with http api
+- `pingpong` answers `pong <request count>`
 
 ## Deploying
 Deploy with

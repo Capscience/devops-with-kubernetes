@@ -1,8 +1,11 @@
 const crypto = require('crypto')
-const express = require('express')
+const fs = require('node:fs/promises')
 require('dotenv').config()
 
-const PORT = process.env.PORT
+const FILE_PATH = process.env.FILE_PATH
+if (!FILE_PATH) {
+  throw new Error('FILE_PATH environment variable must be present!')
+}
 
 const uuid = crypto.randomUUID()
 
@@ -11,18 +14,10 @@ const status = () => {
   return now.toISOString() + ': ' + uuid
 }
 
-const interval = setInterval(() => {
-  console.log(status())
+const interval = setInterval(async () => {
+  try {
+    await fs.writeFile(FILE_PATH, status())
+  } catch (err) {
+    console.error(err)
+  }
 }, 5000)
-
-const app = express()
-
-app.use(express.json())
-
-app.get('/', async (_req, res) => {
-  res.send(status())
-})
-
-app.listen(PORT, () => {
-  console.log(`Server started in port ${PORT}`)
-})

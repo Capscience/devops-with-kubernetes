@@ -17,3 +17,4 @@ k3d cluster create --port 8082:30080@agent:0 -p 8081:80@loadbalancer --agents 2
 - [1.7](https://github.com/Capscience/devops-with-kubernetes/tree/1.7/log-output)
 - [1.8](https://github.com/Capscience/devops-with-kubernetes/tree/1.8/project/todo-app)
 - [1.9](https://github.com/Capscience/devops-with-kubernetes/tree/1.9/log-output)
+- [1.10](https://github.com/Capscience/devops-with-kubernetes/tree/1.10/log-output)

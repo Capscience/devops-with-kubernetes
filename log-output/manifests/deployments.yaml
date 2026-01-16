@@ -12,12 +12,28 @@ spec:
       labels:
         app: log-output
     spec:
+      volumes:
+        - name: shared-logs
+          emptyDir: {}
       containers:
-        - name: log-output
-          image: capscience/log-output:1.7
+        - name: log-writer
+          image: capscience/log-writer:1.10
+          env:
+            - name: FILE_PATH
+              value: "/logs/log.txt"
+          volumeMounts:
+            - name: shared-logs
+              mountPath: /logs
+        - name: log-api
+          image: capscience/log-api:1.10
           env:
             - name: PORT
               value: "3000"
+            - name: FILE_PATH
+              value: "/logs/log.txt"
+          volumeMounts:
+            - name: shared-logs
+              mountPath: /logs
 ---
 apiVersion: apps/v1
 kind: Deployment
