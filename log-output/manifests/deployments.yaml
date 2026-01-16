@@ -14,23 +14,26 @@ spec:
     spec:
       volumes:
         - name: shared-logs
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: log-output-claim
       containers:
         - name: log-writer
-          image: capscience/log-writer:1.10
+          image: capscience/log-writer:1.11.1
           env:
-            - name: FILE_PATH
+            - name: LOG_PATH
               value: "/logs/log.txt"
           volumeMounts:
             - name: shared-logs
               mountPath: /logs
         - name: log-api
-          image: capscience/log-api:1.10
+          image: capscience/log-api:1.11.1
           env:
             - name: PORT
               value: "3000"
-            - name: FILE_PATH
+            - name: LOG_PATH
               value: "/logs/log.txt"
+            - name: PINGPONG_PATH
+              value: "/logs/pingpong.txt"
           volumeMounts:
             - name: shared-logs
               mountPath: /logs
@@ -49,9 +52,18 @@ spec:
       labels:
         app: pingpong
     spec:
+      volumes:
+        - name: shared-logs
+          persistentVolumeClaim:
+            claimName: log-output-claim
       containers:
         - name: pingpong
-          image: capscience/pingpong:1.9
+          image: capscience/pingpong:1.11
           env:
             - name: PORT
               value: "3000"
+            - name: PINGPONG_PATH
+              value: "/logs/pingpong.txt"
+          volumeMounts:
+            - name: shared-logs
+              mountPath: /logs
