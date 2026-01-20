@@ -26,14 +26,14 @@ spec:
             - name: shared-logs
               mountPath: /logs
         - name: log-api
-          image: capscience/log-api:1.11.1
+          image: capscience/log-api:2.1.1
           env:
             - name: PORT
               value: "3000"
             - name: LOG_PATH
               value: "/logs/log.txt"
-            - name: PINGPONG_PATH
-              value: "/logs/pingpong.txt"
+            - name: PINGS_ENDPOINT
+              value: "http://pingpong-svc:2345/pings"
           volumeMounts:
             - name: shared-logs
               mountPath: /logs
@@ -53,17 +53,16 @@ spec:
         app: pingpong
     spec:
       volumes:
-        - name: shared-logs
-          persistentVolumeClaim:
-            claimName: log-output-claim
+        - name: pings
+          emptyDir: {}
       containers:
         - name: pingpong
-          image: capscience/pingpong:1.11
+          image: capscience/pingpong:2.1.1
           env:
             - name: PORT
               value: "3000"
             - name: PINGPONG_PATH
               value: "/logs/pingpong.txt"
           volumeMounts:
-            - name: shared-logs
+            - name: pings
               mountPath: /logs
