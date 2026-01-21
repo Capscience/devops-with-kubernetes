@@ -1,8 +1,17 @@
-const fs = require('node:fs/promises')
-const path = require('node:path')
-const express = require('express')
+import fs from 'node:fs/promises'
+import path from 'node:path'
+import express from 'express'
+import morgan from 'morgan'
+import process from 'node:process'
 
 const IMAGE_DIR = process.env.IMAGE_DIR
+
+const app = express()
+
+app.use(express.static('dist'))
+
+app.use(morgan('tiny'))
+
 
 const newImage = async () => {
   const image = await fetch('https://picsum.photos/1200')
@@ -17,12 +26,6 @@ if (!IMAGE_DIR) {
 }
 
 const IMAGE_TTL = 10 /* minutes */ * 60 /* seconds in minute */ * 1000 /* milliseconds in second */
-
-const app = express()
-
-app.get('/', async (_req, res) => {
-  res.sendFile(path.join(__dirname, '/index.html'))
-})
 
 app.get('/hourly-image', async (_req, res) => {
   try {
@@ -40,4 +43,4 @@ app.get('/hourly-image', async (_req, res) => {
   }
 })
 
-module.exports = app
+export default app
