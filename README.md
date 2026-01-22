@@ -7,10 +7,10 @@ To create the k3d cluster, the following command was used:
 k3d cluster create --port 8082:30080@agent:0 -p 8081:80@loadbalancer --agents 2
 ```
 
-A local persistent volume was created:
+A local persistent volume and namespaces were created:
 ```
 docker exec k3d-k3s-default-agent-0 mkdir -p /tmp/kube
-kubectl apply -f cluster/persistentvolume.yaml
+kubectl apply -f cluster
 ```
 
 
@@ -33,3 +33,4 @@ kubectl apply -f cluster/persistentvolume.yaml
 ### Chapter 3
 - [2.1](https://github.com/Capscience/devops-with-kubernetes/tree/2.1/log-output)
 - [2.2](https://github.com/Capscience/devops-with-kubernetes/tree/2.2/project)
+- [2.3](https://github.com/Capscience/devops-with-kubernetes/tree/2.3/log-output)
