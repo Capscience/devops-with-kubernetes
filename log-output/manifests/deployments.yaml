@@ -17,6 +17,12 @@ spec:
         - name: shared-logs
           persistentVolumeClaim:
             claimName: log-output-claim
+        - name: information
+          configMap:
+            name: log-output-config
+            items:
+              - key: information.txt
+                path: information.txt
       containers:
         - name: log-writer
           image: capscience/log-writer:1.11.1
@@ -27,7 +33,7 @@ spec:
             - name: shared-logs
               mountPath: /logs
         - name: log-api
-          image: capscience/log-api:2.1.1
+          image: capscience/log-api:2.5
           env:
             - name: PORT
               value: "3000"
@@ -35,9 +41,18 @@ spec:
               value: "/logs/log.txt"
             - name: PINGS_ENDPOINT
               value: "http://pingpong-svc:2345/pings"
+            - name: INFO_PATH
+              value: /info/information.txt
+            - name: MESSAGE
+              valueFrom:
+                configMapKeyRef:
+                  name: log-output-config
+                  key: MESSAGE
           volumeMounts:
             - name: shared-logs
               mountPath: /logs
+            - name: information
+              mountPath: /info
 ---
 apiVersion: apps/v1
 kind: Deployment

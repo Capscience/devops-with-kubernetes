@@ -6,7 +6,10 @@ require('dotenv').config()
 const PORT = process.env.PORT
 const LOG_PATH = process.env.LOG_PATH
 const PINGS_ENDPOINT = process.env.PINGS_ENDPOINT
-if (!PORT || !LOG_PATH || !PINGS_ENDPOINT) {
+const MESSAGE = process.env.MESSAGE
+const INFO_PATH = process.env.INFO_PATH
+
+if (!PORT || !LOG_PATH || !PINGS_ENDPOINT || !MESSAGE || !INFO_PATH) {
   throw new Error('PORT, LOG_PATH and PINGS_ENDPOINT environment variables must be present!')
 }
 
@@ -15,10 +18,16 @@ app.use(morgan('tiny'))
 
 app.get('/', async (_req, res) => {
   try {
+    const infoData = await fs.readFile(INFO_PATH, { encoding: 'utf8' })
     const logData = await fs.readFile(LOG_PATH, { encoding: 'utf8' })
     const response = await fetch(PINGS_ENDPOINT)
     const data = await response.json()
-    res.send(`${logData}<br/>Ping / Pongs: ${data.pings}`)
+    res.send(
+      `file content: ${infoData}<br>
+env variable: MESSAGE=${MESSAGE}<br>
+${logData}<br>
+Ping / Pongs: ${data.pings}`
+    )
   } catch (err) {
     console.error(err)
     res.status(500).end()
