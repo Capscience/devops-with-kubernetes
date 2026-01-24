@@ -23,7 +23,7 @@ const App = () => {
   return (
     <>
       <div>
-        <h1>Vite + React</h1>
+        <h1>The Project App</h1>
         <img src="/hourly-image" width="600" height="600" alt="Cool random image" />
         <TodoForm addTodo={addTodo} />
         <ul>
@@ -31,6 +31,9 @@ const App = () => {
             <li>{todo.content}</li>
           )}
         </ul>
+      </div>
+      <div>
+        DevOps with Kubernetes / Capscience
       </div>
     </>
   )

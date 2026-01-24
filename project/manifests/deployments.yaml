@@ -18,15 +18,13 @@ spec:
           emptyDir: {}
       containers:
         - name: todo-app
-          image: capscience/todo-app:2.2.3
-          env:
-            - name: PORT
-              value: "3000"
-            - name: IMAGE_DIR
-              value: /usr/src/app/files
+          image: capscience/todo-app:2.6
+          envFrom:
+            - configMapRef:
+                name: todo-app-config
           volumeMounts:
             - name: image-cache
-              mountPath: /usr/src/app/files
+              mountPath: /usr/src/app/images
 ---
 apiVersion: apps/v1
 kind: Deployment
