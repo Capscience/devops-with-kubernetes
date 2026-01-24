@@ -6,3 +6,12 @@ metadata:
 data:
   information.txt: this text is from file
   MESSAGE: hello world
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pingpong-config
+  namespace: exercises
+data:
+  PORT: "3000"
+  DB_URL: postgres://postgres:example@database-svc:5432

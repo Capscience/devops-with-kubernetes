@@ -37,3 +37,4 @@ kubectl apply -f cluster
 - [2.4](https://github.com/Capscience/devops-with-kubernetes/tree/2.4/project)
 - [2.5](https://github.com/Capscience/devops-with-kubernetes/tree/2.5/log-output)
 - [2.6](https://github.com/Capscience/devops-with-kubernetes/tree/2.6/project)
+- [2.7](https://github.com/Capscience/devops-with-kubernetes/tree/2.7/log-output)

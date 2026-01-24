@@ -69,17 +69,9 @@ spec:
       labels:
         app: pingpong
     spec:
-      volumes:
-        - name: pings
-          emptyDir: {}
       containers:
         - name: pingpong
-          image: capscience/pingpong:2.1.1
-          env:
-            - name: PORT
-              value: "3000"
-            - name: PINGPONG_PATH
-              value: "/logs/pingpong.txt"
-          volumeMounts:
-            - name: pings
-              mountPath: /logs
+          image: capscience/pingpong:2.7
+          envFrom:
+            - configMapRef:
+                name: pingpong-config
