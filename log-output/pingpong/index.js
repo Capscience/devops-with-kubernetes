@@ -30,6 +30,17 @@ const app = express()
 app.use(express.json())
 app.use(morgan('tiny'))
 
+app.get('/healthz', async (_req, res) => {
+  try {
+    const data = await PingPong.count()
+    console.log(data)
+    return res.status(200).end()
+  } catch (err) {
+    console.error(err)
+    return res.status(503).end()
+  }
+})
+
 app.get('/pingpong', async (_req, res) => {
   try {
     await PingPong.create()

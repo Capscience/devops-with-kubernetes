@@ -33,7 +33,13 @@ spec:
             - name: shared-logs
               mountPath: /logs
         - name: log-api
-          image: capscience/log-api:2.5
+          image: capscience/log-api:4.1.2
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+              path: /healthz
+              port: 3000
           env:
             - name: PORT
               value: "3000"
@@ -71,7 +77,13 @@ spec:
     spec:
       containers:
         - name: pingpong
-          image: capscience/pingpong:2.7
+          image: capscience/pingpong:4.1.2
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+              path: /healthz
+              port: 3000
           envFrom:
             - configMapRef:
                 name: pingpong-config

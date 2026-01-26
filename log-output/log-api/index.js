@@ -16,6 +16,17 @@ if (!PORT || !LOG_PATH || !PINGS_ENDPOINT || !MESSAGE || !INFO_PATH) {
 const app = express()
 app.use(morgan('tiny'))
 
+app.get('/healthz', async (_req, res) => {
+  try {
+    const response = await fetch(PINGS_ENDPOINT)
+    console.log(response.status)
+    return res.status(response.status).end()
+  } catch (err) {
+    console.error(err)
+    return res.status(503).end()
+  }
+})
+
 app.get('/', async (_req, res) => {
   try {
     const infoData = await fs.readFile(INFO_PATH, { encoding: 'utf8' })
