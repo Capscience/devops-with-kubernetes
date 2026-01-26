@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: read-wiki-cj
+  namespace: project
+spec:
+  schedule: "@hourly"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: read-wiki-job
+              image: alpine/curl
+              command:
+                - /bin/sh
+                - -ce
+                - >-
+                  curl -X POST -H "Content-Type: application/json" -d "{ \"content\": \"Read $(curl -w "%{redirect_url}" https://en.wikipedia.org/wiki/Special:Random)\" }" http://todo-backend-svc:1234/api/todos
+          restartPolicy: OnFailure
