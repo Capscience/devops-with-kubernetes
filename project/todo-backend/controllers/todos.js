@@ -12,9 +12,13 @@ todosRouter.get('/', async (_req, res) => {
 })
 
 todosRouter.post('/', async (req, res) => {
+  const body = req.body
+  if (body.content.length > 140) {
+    return res.status(400).json({ error: "Content too long" })
+  }
   try {
     const newTodo = await Todo.create(req.body)
-    return res.json(newTodo)
+    return res.status(201).json(newTodo)
   } catch (error) {
     console.error(error)
     return res.status(400).json({ error })

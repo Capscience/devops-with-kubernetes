@@ -43,7 +43,7 @@ spec:
     spec:
       containers:
         - name: todo-backend
-          image: capscience/todo-backend:2.8.3
+          image: capscience/todo-backend:2.10
           envFrom:
             - configMapRef:
                 name: todo-backend-config
