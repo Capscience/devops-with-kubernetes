@@ -1,5 +1,5 @@
 # Todo app
-Deploy with
+Deploy to cluster (created as instructed in main README.md) with
 ```
 kubectl apply -f manifests
 ```
