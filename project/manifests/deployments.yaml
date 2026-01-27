@@ -43,7 +43,19 @@ spec:
     spec:
       containers:
         - name: todo-backend
-          image: capscience/todo-backend:2.10
+          image: capscience/todo-backend:4.2
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+              path: /healthz
+              port: 3000
+          livenessProbe:
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            httpGet:
+              path: /healthz
+              port: 3000
           envFrom:
             - configMapRef:
                 name: todo-backend-config
