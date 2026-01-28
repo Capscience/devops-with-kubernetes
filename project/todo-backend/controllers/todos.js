@@ -25,4 +25,16 @@ todosRouter.post('/', async (req, res) => {
   }
 })
 
+todosRouter.put('/:id', async (req, res) => {
+  const body = req.body
+  const todo = await Todo.findByPk(req.params.id)
+  if (todo) {
+    todo.done = body.done
+    await todo.save()
+    res.json(todo)
+  } else {
+    res.status(404).end()
+  }
+})
+
 module.exports = todosRouter

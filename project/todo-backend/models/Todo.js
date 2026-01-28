@@ -13,6 +13,9 @@ Todo.init({
     type: DataTypes.TEXT,
     allowNull: false,
   },
+  done: {
+    type: DataTypes.BOOLEAN,
+  },
 }, {
   sequelize: db,
   underscored: true,
@@ -20,6 +23,6 @@ Todo.init({
   modelName: 'todo',
 })
 
-Todo.sync()
+Todo.sync({ alter: true })
 
 module.exports = Todo

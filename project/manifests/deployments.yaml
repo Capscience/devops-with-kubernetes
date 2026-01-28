@@ -18,7 +18,7 @@ spec:
           emptyDir: {}
       containers:
         - name: todo-app
-          image: capscience/todo-app:2.6
+          image: capscience/todo-app:4.5.1
           envFrom:
             - configMapRef:
                 name: todo-app-config
@@ -43,7 +43,7 @@ spec:
     spec:
       containers:
         - name: todo-backend
-          image: capscience/todo-backend:4.2
+          image: capscience/todo-backend:4.5.1
           readinessProbe:
             initialDelaySeconds: 10
             periodSeconds: 5

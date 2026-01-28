@@ -20,4 +20,18 @@ const createNew = async newTodo => {
   return await response.json()
 }
 
-export default { getAll, createNew }
+const update = async todo => {
+  const options = {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(todo)
+  }
+
+  const response = await fetch(`${baseUrl}/${todo.id}`, options)
+  if (!response.ok) {
+    throw new Error('Failed to update todo')
+  }
+  return await response.json()
+}
+
+export default { getAll, createNew, update }
