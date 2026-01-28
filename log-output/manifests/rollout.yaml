@@ -1,0 +1,53 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  namespace: exercises
+  name: pingpong-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pingpong
+  strategy:
+    canary:
+      steps:
+        - setWeight: 50
+        - analysis:
+            templates:
+              - templateName: cpu-max-usage
+  template:
+    metadata:
+      labels:
+        app: pingpong
+    spec:
+      containers:
+        - name: pingpong
+          image: capscience/pingpong:4.4-3
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+              path: /healthz
+              port: 3000
+          envFrom:
+            - configMapRef:
+                name: pingpong-config
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: cpu-max-usage
+spec:
+  metrics:
+    - name: restart-rate
+      initialDelay: 5m
+      successCondition: result < 0.05 # Usage normally between 0.001-0.01. For failure test, 0.0001 was used.
+      provider:
+        prometheus:
+          address: http://kube-prometheus-stack-1769-prometheus.prometheus.svc.cluster.local:9090
+          query: |
+            scalar(
+              sum(
+                node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate5m{namespace="exercises"}
+              )
+            )
