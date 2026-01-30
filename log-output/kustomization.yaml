@@ -1,20 +1,20 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - manifests/configmaps.yaml
-  - manifests/deployments.yaml
-  - manifests/ingress.yaml
-  - manifests/persistentvolumeclaim.yaml
-  - manifests/rollout.yaml
-  - manifests/services.yaml
-  - manifests/statefulsets.yaml
+- manifests/configmaps.yaml
+- manifests/deployments.yaml
+- manifests/ingress.yaml
+- manifests/persistentvolumeclaim.yaml
+- manifests/rollout.yaml
+- manifests/services.yaml
+- manifests/statefulsets.yaml
 images:
-  - name: LOG-WRITER
-    newName: capscience/log-writer
-    newTag: "1.11.1"
-  - name: LOG-API
-    newName: capscience/log-api
-    newTag: "4.1.2"
-  - name: PINGPONG
-    newName: capscience/pingpong
-    newTag: "4.4-3"
+- name: LOG-API
+  newName: capscience/log-api
+  newTag: 4f070cd49a914348c5049cf8cfc106f0b2bd2b37
+- name: LOG-WRITER
+  newName: capscience/log-writer
+  newTag: 4f070cd49a914348c5049cf8cfc106f0b2bd2b37
+- name: PINGPONG
+  newName: capscience/pingpong
+  newTag: 4f070cd49a914348c5049cf8cfc106f0b2bd2b37
