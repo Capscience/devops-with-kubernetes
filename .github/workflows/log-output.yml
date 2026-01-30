@@ -58,5 +58,5 @@ jobs:
       - name: commit kustomization.yaml to GitHub
         uses: EndBug/add-and-commit@v9
         with:
-          add: "kustomization.yaml"
+          add: "log-output/kustomization.yaml"
           message: Released new log-output version ${{ github.sha }}
