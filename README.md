@@ -50,3 +50,4 @@ Chapter 5
 - [4.3](https://github.com/Capscience/devops-with-kubernetes/tree/4.3/other-answers/4.3.md)
 - [4.4](https://github.com/Capscience/devops-with-kubernetes/tree/4.4/log-output)
 - [4.5](https://github.com/Capscience/devops-with-kubernetes/tree/4.5/project)
+- [4.7](https://github.com/Capscience/devops-with-kubernetes/tree/4.7/log-output)

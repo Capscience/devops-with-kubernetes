@@ -5,10 +5,12 @@ Contains three applications:
 - `pingpong` answers `pong <request count>`
 
 ## Deploying
-Deploy with
+Manual deploy with
 ```
 kubectl apply -k .
 ```
+
+With ArgoCD deploys automatically on push to github.
 
 ## Accessing
 To test the service open `http://localhost:8081` in your browser. You should get a timestamp with a random string from the `log-writer` app, as well as the number of pingpongs from the `pingpong` app, provided by the `log-api` app.
