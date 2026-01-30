@@ -7,7 +7,7 @@ Contains three applications:
 ## Deploying
 Deploy with
 ```
-kubectl apply -f manifests
+kubectl apply -k .
 ```
 
 ## Accessing

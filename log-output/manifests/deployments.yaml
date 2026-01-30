@@ -25,7 +25,7 @@ spec:
                 path: information.txt
       containers:
         - name: log-writer
-          image: capscience/log-writer:1.11.1
+          image: LOG-WRITER
           env:
             - name: LOG_PATH
               value: "/logs/log.txt"
@@ -33,7 +33,7 @@ spec:
             - name: shared-logs
               mountPath: /logs
         - name: log-api
-          image: capscience/log-api:4.1.2
+          image: LOG-API
           readinessProbe:
             initialDelaySeconds: 10
             periodSeconds: 5

@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: pingpong
-          image: capscience/pingpong:4.4-3
+          image: PINGPONG
           readinessProbe:
             initialDelaySeconds: 10
             periodSeconds: 5
