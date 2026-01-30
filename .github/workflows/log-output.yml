@@ -50,6 +50,7 @@ jobs:
 
       - name: Use right image
         run: |-
+          cd log-output
           kustomize edit set image LOG-WRITER capscience/log-writer:$GITHUB_SHA
           kustomize edit set image LOG-API capscience/log-api:$GITHUB_SHA
           kustomize edit set image PINGPONG capscience/pingpong:$GITHUB_SHA
