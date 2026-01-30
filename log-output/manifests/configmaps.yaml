@@ -5,7 +5,7 @@ metadata:
   namespace: exercises
 data:
   information.txt: this text is from file
-  MESSAGE: hello kube
+  MESSAGE: hello world
 ---
 apiVersion: v1
 kind: ConfigMap
