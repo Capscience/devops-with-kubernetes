@@ -51,9 +51,9 @@ jobs:
       - name: Use right image
         run: |-
           cd log-output
-          kustomize edit set image LOG-WRITER capscience/log-writer:$GITHUB_SHA
-          kustomize edit set image LOG-API capscience/log-api:$GITHUB_SHA
-          kustomize edit set image PINGPONG capscience/pingpong:$GITHUB_SHA
+          kustomize edit set image LOG-WRITER capscience/log-writer:${{ github.sha }}
+          kustomize edit set image LOG-API capscience/log-api:${{ github.sha }}
+          kustomize edit set image PINGPONG capscience/pingpong:${{ github.sha }}
 
       - name: commit kustomization.yaml to GitHub
         uses: EndBug/add-and-commit@v9
